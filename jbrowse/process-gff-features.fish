@@ -10,7 +10,7 @@ cd $jbrowsedir
 ## Function for common arguments
 
 function processgff
-    bin/flatfile-to-json.pl --trackType CanvasFeatures --sortMem 50000000000
+    bin/flatfile-to-json.pl --trackType CanvasFeatures --sortMem 50000000000 $argv
 end
 
 ## Process the by modification tracks
