@@ -1,9 +1,8 @@
-#!/bin/bash
 
-# Process the features with less columns
+# Process the features
 
-jbrowsedir=~/jbrowse
-gffdir=~/lesscol_gff_features
+set jbrowsedir ~/jbrowse
+set gffdir ~/gff-features
 
 cd $jbrowsedir
 
@@ -21,8 +20,8 @@ bin/flatfile-to-json.pl --gff $gffdir/dm6_m6A.gff3 --trackLabel 'all_m6A' --out 
 
 
 # Generate name index
-bin/generate-names.pl --out data/hg19 --mem 50000000000 &&
-bin/generate-names.pl --out data/mm10 --mem 50000000000 &&
+bin/generate-names.pl --out data/hg19 --mem 50000000000
+bin/generate-names.pl --out data/mm10 --mem 50000000000
 bin/generate-names.pl --out data/dm6 --mem 50000000000
 
 
