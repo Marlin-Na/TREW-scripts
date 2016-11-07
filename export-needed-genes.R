@@ -92,16 +92,16 @@ gene_feas <- gene_feas$Gene_ID
 
 library(GenomicFeatures)
 
-# hg19.txdb <- makeTxDbFromGFF(file = 'tmp/gtf-genemodel/hg19.gtf')
-# mm10.txdb <- makeTxDbFromGFF(file = 'tmp/gtf-genemodel/mm10.gtf')
-# dm6.txdb <- makeTxDbFromGFF(file = 'tmp/gtf-genemodel/dm6.gtf')
-ori.genes.hg19 <- genes(makeTxDbFromGFF(file = 'tmp/gtf-genemodel/hg19.gtf'))
-ori.genes.mm10 <- genes(makeTxDbFromGFF(file = 'tmp/gtf-genemodel/mm10.gtf'))
-ori.genes.dm6 <- genes(makeTxDbFromGFF(file = 'tmp/gtf-genemodel/dm6.gtf'))
+# hg19.txdb <- makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/hg19.gtf')
+# mm10.txdb <- makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/mm10.gtf')
+# dm6.txdb <- makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/dm6.gtf')
+ori.genes.hg19 <- genes(makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/hg19.gtf'))
+ori.genes.mm10 <- genes(makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/mm10.gtf'))
+ori.genes.dm6 <- genes(makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/dm6.gtf'))
 
-hg19.txdb <- makeTxDbFromGFF(file = 'tmp/gtf-genemodel/mod.hg19.gtf')
-mm10.txdb <- makeTxDbFromGFF(file = 'tmp/gtf-genemodel/mod.mm10.gtf')
-dm6.txdb <- makeTxDbFromGFF(file = 'tmp/gtf-genemodel/mod.dm6.gtf')
+hg19.txdb <- makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/mod.hg19.gtf')
+mm10.txdb <- makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/mod.mm10.gtf')
+dm6.txdb <- makeTxDbFromGFF(file = 'TREW-scripts/gtf-genemodel/mod.dm6.gtf')
 
 genes.hg19 <- genes(hg19.txdb)
 genes.mm10 <- genes(mm10.txdb)

@@ -334,7 +334,7 @@ for (modi in unique(all_full_table$Modification)) {
 
         modi_geno_gr <- filter(modi_df, Genome_assembly == geno) %>% as_gr
 
-        folder <- 'tmp/gff-features/by_modification/'
+        folder <- 'TREW-scripts/gff-features/by_modification/'
         path <- paste0(folder,geno,'_',modi,'.','gff3')
 
         export.gff3(modi_geno_gr, path)
@@ -422,17 +422,17 @@ li.dm6 <-
 
 for (datasetname in names(li.hg19)) {
     gr.set <- li.hg19[[datasetname]]
-    export.gff3(gr.set, paste0('tmp/gff-features/hg19/',datasetname))
+    export.gff3(gr.set, paste0('TREW-scripts/gff-features/hg19/',datasetname))
 }
 
 for (datasetname in names(li.mm10)) {
     gr.set <- li.mm10[[datasetname]]
-    export.gff3(gr.set, paste0('tmp/gff-features/mm10/',datasetname))
+    export.gff3(gr.set, paste0('TREW-scripts/gff-features/mm10/',datasetname))
 }
 
 for (datasetname in names(li.dm6)) {
     gr.set <- li.dm6[[datasetname]]
-    export.gff3(gr.set, paste0('tmp/gff-features/dm6/',datasetname))
+    export.gff3(gr.set, paste0('TREW-scripts/gff-features/dm6/',datasetname))
 }
 
 
