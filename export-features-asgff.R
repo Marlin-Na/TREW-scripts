@@ -259,21 +259,11 @@ all_full_table <- all_full_table %>%
         Diff_p_value,
         Diff_fdr,
         Diff_log2FoldChange,
-        Gene_ID,
         Log2_RPKM_Wt,
         Log2_RPKM_Treated,
-        Genome_assembly,
-        Modification,
-        Technique,
-        Target,
-        Target_type,
-        Perturbation,
-        Cell_line,
-        Treatment,
-        Species,
-        LiftOver,
 
-        DataSet_ID
+        DataSet_ID,
+        Modification
     )
 
 # Extract with which columns
@@ -286,36 +276,36 @@ all_full_table <- all_full_table %>%
 # | T | Diff_p_value            |                 0.549540873857625 |
 # | T | Diff_fdr                |                 0.621260615022094 |
 # | T | Diff_log2FoldChange     |                             0.218 |
-# | T | Gene_ID                 |                            HS6ST1 |
+# |   | Gene_ID                 |                            HS6ST1 |
 # |   | Source_ID               |         m6A_Ftokd_MEFHS_lift.hg19 |
-# |   | Consistency             |                                 1 |
+# | T | Consistency             |                                 1 |
 # | T | Log2_RPKM_Wt            |                 0.729256748836259 |
 # | T | Log2_RPKM_Treated       |                  3.33121584334439 |
-# | X | Overlap_UTR5            |                                 0 |
-# | X | Overlap_CDS             |                                 1 |
-# | X | Overlap_UTR3            |                                 0 |
-# | X | Overlap_mRNA            |                                 1 |
-# | X | Overlap_lncRNA          |                                 0 |
-# | X | Overlap_sncRNA          |                                 0 |
-# | X | Overlap_tRNA            |                                 0 |
-# | X | Overlap_miRNA           |                                 0 |
-# | X | Overlap_miRNATS         |                                 0 |
-# | X | Distance_ConsensusMotif |                                 0 |
-# | X | Distance_StartCodon     |                             50133 |
-# | X | Distance_StopCodon      |                                52 |
+# |   | Overlap_UTR5            |                                 0 |
+# |   | Overlap_CDS             |                                 1 |
+# |   | Overlap_UTR3            |                                 0 |
+# |   | Overlap_mRNA            |                                 1 |
+# |   | Overlap_lncRNA          |                                 0 |
+# |   | Overlap_sncRNA          |                                 0 |
+# |   | Overlap_tRNA            |                                 0 |
+# |   | Overlap_miRNA           |                                 0 |
+# |   | Overlap_miRNATS         |                                 0 |
+# |   | Distance_ConsensusMotif |                                 0 |
+# |   | Distance_StartCodon     |                             50133 |
+# |   | Distance_StopCodon      |                                52 |
 # | ? | DataSet_ID              |         m6A_Ftokd_MEFHS_lift.hg19 |
-# | T | Genome_assembly         |                              hg19 |
-# | T | Modification            |                               m6A |
-# | T | Technique               |                             MeRIP |
-# | T | Target                  |                               Fto |
-# | T | Target_type             |                            eraser |
-# | T | Perturbation            |                                KD |
+# |   | Genome_assembly         |                              hg19 |
+# |   | Modification            |                               m6A |
+# |   | Technique               |                             MeRIP |
+# |   | Target                  |                               Fto |
+# |   | Target_type             |                            eraser |
+# |   | Perturbation            |                                KD |
 # |   | Date_of_process         |                          5-Jul-16 |
 # |   | Paper                   | Dynamic m(6)A mRNA methylation... |
-# | T | Cell_line               |                               MEF |
-# | T | Treatment               |                        Heat Shock |
-# | T | Species                 |                      Mus musculus |
-# | T | LiftOver                |                 Lift mm10 to hg19 |
+# |   | Cell_line               |                               MEF |
+# |   | Treatment               |                        Heat Shock |
+# |   | Species                 |                      Mus musculus |
+# |   | LiftOver                |                 Lift mm10 to hg19 |
 # |   | Computation_pepline     |      trim_galore,tophat,exomepeak |
 
 
