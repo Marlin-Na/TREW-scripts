@@ -247,7 +247,7 @@ library(GenomicRanges)
 all_full_table <- Tb1()
 all_full_table <- tbl_df(all_full_table)
 
-all_full_table <- all_full_table %>%
+select_needed_col <- . %>%
     select(
         Chromosome,
         Range_start,
@@ -260,10 +260,7 @@ all_full_table <- all_full_table %>%
         Diff_fdr,
         Diff_log2FoldChange,
         Log2_RPKM_Wt,
-        Log2_RPKM_Treated,
-
-        DataSet_ID,
-        Modification
+        Log2_RPKM_Treated
     )
 
 # Extract with which columns
@@ -322,7 +319,10 @@ for (modi in unique(all_full_table$Modification)) {
 
     for (geno in unique(modi_df$Genome_assembly)) {
 
-        modi_geno_gr <- filter(modi_df, Genome_assembly == geno) %>% as_gr
+        modi_geno_gr <- modi_df %>%
+            filter(Genome_assembly == geno) %>%
+            select_needed_col %>%
+            as_gr
 
         folder <- 'TREW-scripts/gff-features/by_modification/'
         path <- paste0(folder,geno,'_',modi,'.','gff3')
@@ -389,21 +389,25 @@ distinct(count(modi2datasets),n)
 
 
 li.datasets <- split(all_full_table, all_full_table$DataSet_ID) %>%
+    lapply(select_needed_col) %>%
     lapply(as_gr)
 
 li.hg19 <-
     filter(all_full_table, Genome_assembly == 'hg19') %>%
     split(filter(all_full_table, Genome_assembly == 'hg19')$DataSet_ID) %>%
+    lapply(select_needed_col) %>%
     lapply(as_gr)
 
 li.mm10 <-
     filter(all_full_table, Genome_assembly == 'mm10') %>%
     split(filter(all_full_table, Genome_assembly == 'mm10')$DataSet_ID) %>%
+    lapply(select_needed_col) %>%
     lapply(as_gr)
 
 li.dm6 <-
     filter(all_full_table, Genome_assembly == 'dm6') %>%
     split(filter(all_full_table, Genome_assembly == 'dm6')$DataSet_ID) %>%
+    lapply(select_needed_col) %>%
     lapply(as_gr)
 
 
