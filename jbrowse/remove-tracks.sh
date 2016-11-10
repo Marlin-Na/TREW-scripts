@@ -1,23 +1,17 @@
-#!/bin/bash
+#!/usr/bin/fish
 
-# Remove all current tracks
+# Remove all tracks except gene model and DNA
 
-jbrowsedir=~/jbrowse
+set jbrowsedir ~/jbrowse
 
 cd $jbrowsedir
 
-## hg19
-bin/remove-track.pl -D --trackLabel 'all_m6A' --dir data/hg19 
-bin/remove-track.pl -D --trackLabel 'all_m1A' --dir data/hg19 
-bin/remove-track.pl -D --trackLabel 'all_m5C' --dir data/hg19 
-bin/remove-track.pl -D --trackLabel 'all_Psi' --dir data/hg19 
-## mm10
-bin/remove-track.pl -D --trackLabel 'all_m6A' --dir data/mm10 
-bin/remove-track.pl -D --trackLabel 'all_m5C' --dir data/mm10 
-## dm6
-bin/remove-track.pl -D --trackLabel 'all_m6A' --dir data/dm6 
-
-
+for genome in hg19 mm10 dm6
+    set tracks (ls data/$genome/tracks -I gene_model)
+    for track in $tracks
+        bin/remove-track.pl -D --trackLabel $track --dir data/$genome
+    end
+end
 
 # Sync to the server
 rsync -r -v --delete ./ /var/www/html/jbrowse/
