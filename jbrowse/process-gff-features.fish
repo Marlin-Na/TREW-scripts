@@ -1,11 +1,30 @@
+#!/usr/bin/fish
 
-# Process the features
-
-## Setup dir variable
+# Setup dir variable
 set jbrowsedir ~/jbrowse
 set gffdir ~/gff-features
 
 cd $jbrowsedir
+
+
+# Remove all tracks except gene model and DNA
+
+for genome in hg19 mm10 dm6
+    set tracks (ls data/$genome/tracks -I gene_model)
+    for track in $tracks
+        bin/remove-track.pl -D --trackLabel $track --dir data/$genome
+    end
+end
+
+# Sync to the server
+# rsync -r -v --delete ./ /var/www/html/jbrowse/
+
+
+
+
+
+# Process the features
+
 
 ## Function for common arguments
 
@@ -14,6 +33,8 @@ function processgff
 end
 
 ## Process the by modification tracks
+## TODO: automatically check available modifications by genome
+
 # hg19
 processgff --gff $gffdir/by_modification/hg19_m6A.gff3 --trackLabel 'all_m6A' --out data/hg19  --key 'All m6A sites' 
 processgff --gff $gffdir/by_modification/hg19_m1A.gff3 --trackLabel 'all_m1A' --out data/hg19  --key 'All m1A sites' 
@@ -45,3 +66,5 @@ bin/generate-names.pl --out data/dm6 --mem 50000000000
 
 # Sync to the server
 rsync -r -v --delete ./ /var/www/html/jbrowse/
+
+
