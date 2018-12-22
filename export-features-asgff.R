@@ -2,6 +2,11 @@
 library(dplyr)
 library(GenomicRanges)
 
+
+all.files <- list.files("gff-features/",full.names = T,recursive = T)
+for (i in all.files) file.remove(i)
+
+#setwd("~/msync/projects/TREW/TREW-scripts/")
 db <- src_sqlite(path = './TREW_0.2.0.db')
 db
 
@@ -13,20 +18,18 @@ t4 <- tbl(db, 'Source_Info')
 joined <- t1 %>%
     left_join(t3) %>%
     left_join(t4) %>%
-    left_join(t2) %>%
+    # Do not join `Raw_data_records`:
+    #     One Experiment_ID can correspond to multiple GEO_ID
+    # left_join(t2) %>%
     collect(n = Inf)
 joined
 
-
-
-joined %>%
-    select(Padj, Counts_WT_IP) %>% unique
 
 colnames(joined)
 
 needed <- joined %>%
     # Select the needed meta columns
-    select(
+    dplyr::select(
         Range_ID,
         Site_ID,
         Start,
@@ -70,14 +73,36 @@ needed <- joined %>%
         Paper,
         Cell_line,
         Treatment,
-        Species,
+        Species
       # Computation_pepline,
       # Note_t3,
-        GEO_ID,
-        IP_Input,
-        Genotype,
-        Replicate
+      
+      
+      # These columns are in 'Raw_data_records'
+        # GEO_ID,
+        # IP_Input,
+        # Genotype,
+        # Replicate
     )
+
+### TEMP:  Remove three tracks    ------------------------------
+
+needed %>% group_by(Genome_assembly, Experiment_ID) %>%
+    summarize(num = n()) %>% summarize(num = n())
+
+needed <- needed %>%
+    filter(
+        ((!(Experiment_ID %in% c("m6A-YTHDF2-kd-MEF", "m6A-YTHDF2-kd-MEF-HS"))) &
+            Genome_assembly == "mm10"
+        ) |
+        (Experiment_ID != "m6A-YTHDF2-oe-Hela" & Genome_assembly == "hg19") |
+        (Genome_assembly == "dm6")
+    )
+
+needed %>% group_by(Genome_assembly, Experiment_ID) %>%
+    summarize(num = n()) %>% summarize(num = n())
+
+### TEMP END                    ------------------------------
 
 
 exportgff <- function(df,
